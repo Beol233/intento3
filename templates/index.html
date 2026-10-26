@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% if mensajes %}
+            {% for categoria, mensaje in mensajes %}
+                <p>{{ mensaje }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <section>
+        <h2>Registro</h2>
+        <form action="/crear_usuario" method="POST">
+            <p><label>Nombre: <input type="text" name="nombre" required></label></p>
+            <p><label>Apellido: <input type="text" name="apellido" required></label></p>
+            <p><label>E-mail: <input type="email" name="email" required></label></p>
+            <p><label>Contraseña: <input type="password" name="password" required></label></p>
+            <p><label>Confirmar contraseña: <input type="password" name="password_conf" required></label></p>
+            <button type="submit">Registrarme</button>
+        </form>
+    </section>
+
+    <br>
+
+    <section>
+        <h2>Iniciar sesión</h2>
+        <form action="/iniciar_sesion" method="POST">
+            <p><label>E-mail: <input type="email" name="email_inicio_sesion" required></label></p>
+            <p><label>Contraseña: <input type="password" name="password_inicio_sesion" required></label></p>
+            <button type="submit">Iniciar sesión</button>
+        </form>
+    </section>
+</body>
+</html>

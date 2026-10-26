@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Bienvenid@ {{ usuarios.nombre }}</h1>
+    <a href="nueva">nueva mision</a>
+    <a href="cerrar_sesion">cerrar sesion</a>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>nombre</th>
+                <th>Itinerario</th>
+                <th>Fecha de inicio</th>
+                <th>Fecha de fin</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for viaje in viajes %}
+            <tr>
+                <td>{{ viaje.organizador }}</td>
+                <td>{{ viaje.itinerario }}</td>
+                <td>{{ viaje.fecha_inicio }}</td>
+                <td>{{ viaje.fecha_fin }}</td>
+                <td>
+                    <a href="/ver/{{ viaje.id }}">Ver</a> |
+                    <a href="/editar/{{ viaje.id }}">Editar</a> |
+                    <a href="/eliminar/{{ viaje.id }}">Borrar</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">No hay viajes registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
