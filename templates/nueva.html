@@ -1,11 +1,53 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Nueva Misión - VoluntarMe</title>
 </head>
 <body>
-    
+
+    <h1>Crear Nueva Misión</h1>
+
+    <a href="/dashboard">Inicio</a>
+    <a href="/cerrar_sesion">Cerrar Sesión</a>
+
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% if mensajes %}
+            {% for categoria, mensaje in mensajes %}
+                <p>{{ mensaje }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form action="/crear_mision" method="POST">
+        <p>
+            <label>Nombre:
+                <input type="text" name="nombre" required>
+            </label>
+        </p>
+
+        <p>
+            <label>Fecha:
+                <input type="date" name="fecha" required>
+            </label>
+        </p>
+
+        <p>
+            <label>Voluntarios Necesarios:
+                <input type="number" name="voluntarios" min="1" required>
+            </label>
+        </p>
+
+        <p>
+            <label>Descripción:
+                <textarea name="descripcion" required></textarea>
+            </label>
+        </p>
+
+        <button type="submit">Crear Misión</button>
+    </form>
+
 </body>
 </html>

@@ -5,19 +5,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema intento_3
+-- Schema voluntame
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema intento_3
+-- Schema voluntame
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `intento_3` DEFAULT CHARACTER SET utf8 ;
-USE `intento_3` ;
+CREATE SCHEMA IF NOT EXISTS `voluntame` DEFAULT CHARACTER SET utf8 ;
+USE `voluntame` ;
 
 -- -----------------------------------------------------
--- Table `intento_3`.`usuarios`
+-- Table `voluntame`.`usuarios`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `intento_3`.`usuarios` (
+CREATE TABLE IF NOT EXISTS `voluntame`.`usuarios` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(255) NULL,
   `apellido` VARCHAR(255) NULL,
@@ -30,9 +30,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `intento_3`.`misiones`
+-- Table `voluntame`.`misiones`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `intento_3`.`misiones` (
+CREATE TABLE IF NOT EXISTS `voluntame`.`misiones` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(255) NULL,
   `fecha` VARCHAR(255) NULL,
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `intento_3`.`misiones` (
   INDEX `fk_misiones_usuarios_idx` (`usuario_id` ASC) VISIBLE,
   CONSTRAINT `fk_misiones_usuarios`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `intento_3`.`usuarios` (`id`)
+    REFERENCES `voluntame`.`usuarios` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

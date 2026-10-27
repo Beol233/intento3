@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Misión - VoluntarMe</title>
+</head>
+<body>
+
+    <h1>Detalles de la Misión</h1>
+
+    <a href="/dashboard">Inicio</a>
+    <a href="/cerrar_sesion">Cerrar Sesión</a>
+
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% if mensajes %}
+            {% for categoria, mensaje in mensajes %}
+                <p>{{ mensaje }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <h2>{{ mision.nombre }}</h2>
+
+    <p>Fecha: {{ mision.fecha }}</p>
+    <p>Voluntarios Necesarios: {{ mision.voluntarios }}</p>
+    <p>Descripción: {{ mision.descripcion }}</p>
+
+    <h3>Voluntarios Inscritos</h3>
+
+    <p>
+        {{ voluntarios|length }} de {{ mision.voluntarios }} cupos ocupados
+    </p>
+
+    <ul>
+        {% for voluntario in voluntarios %}
+            <li>{{ voluntario.nombre }} {{ voluntario.apellido }}</li>
+        {% else %}
+            <li>No hay voluntarios inscritos.</li>
+        {% endfor %}
+    </ul>
+
+    {% if inscrito %}
+        <form action="/retirar/{{ mision.id }}" method="POST">
+            <button type="submit">Retirarme de la Misión</button>
+        </form>
+    {% elif voluntarios|length < mision.voluntarios|int %}
+        <form action="/inscribir/{{ mision.id }}" method="POST">
+            <button type="submit">Inscribirme en la Misión</button>
+        </form>
+    {% else %}
+        <p>Esta misión ya no tiene cupos disponibles.</p>
+    {% endif %}
+
+    {% if mision.usuario_id == session['usuario_id'] %}
+        <hr>
+
+        <a href="/editar/{{ mision.id }}">Editar Misión</a>
+
+        <form action="/eliminar/{{ mision.id }}" method="POST">
+            <button type="submit">Eliminar Misión</button>
+        </form>
+    {% endif %}
+
+    <p><a href="/dashboard">Volver a la lista</a></p>
+
+</body>
+</html>

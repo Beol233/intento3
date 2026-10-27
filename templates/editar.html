@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Misión - VoluntarMe</title>
+</head>
+<body>
+
+    <h1>Editar Misión</h1>
+
+    <a href="/dashboard">Inicio</a>
+    <a href="/cerrar_sesion">Cerrar Sesión</a>
+
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% if mensajes %}
+            {% for categoria, mensaje in mensajes %}
+                <p>{{ mensaje }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form action="/actualizar_mision/{{ mision.id }}" method="POST">
+        <p>
+            <label>Nombre:
+                <input type="text" name="nombre" value="{{ mision.nombre }}" required>
+            </label>
+        </p>
+
+        <p>
+            <label>Fecha:
+                <input type="date" name="fecha" value="{{ mision.fecha }}" required>
+            </label>
+        </p>
+
+        <p>
+            <label>Voluntarios Necesarios:
+                <input type="number" name="voluntarios" min="1" value="{{ mision.voluntarios }}" required>
+            </label>
+        </p>
+
+        <p>
+            <label>Descripción:
+                <textarea name="descripcion" required>{{ mision.descripcion }}</textarea>
+            </label>
+        </p>
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+
+</body>
+</html>
